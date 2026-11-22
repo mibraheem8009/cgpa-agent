@@ -1,3 +1,4 @@
+import os
 from fastmcp import FastMCP
 from tools import (
     marks_to_grade_points,
@@ -19,4 +20,6 @@ mcp.tool(get_remaining_credit_hours)
 mcp.tool(save_report)
 
 if __name__ == "__main__":
-    mcp.run(transport="http", host="127.0.0.1", port=8000)
+    port = int(os.environ.get("PORT", "8000"))
+    host = "0.0.0.0" if "PORT" in os.environ else "127.0.0.1"
+    mcp.run(transport="http", host=host, port=port)
